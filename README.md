@@ -82,6 +82,7 @@ Install a package from hackage, a path, a git repo or a github repo.
  * `install_binary` - Upon completion of cabal install, copy file to target. The hash must contain :from and :to attributes. The hash can contain :user and :group for setting owner after copy. Paths are relative to the root of the cabal project.
  * `cabal_update` - Run cabal update before install.
  * `cache_for` - See cabal_update resource. This is minutes to cache current cabal index for.
+ * `environment` - A hash of environmental variables to set when running the `cabal install` command.  Empty by default.
 
 </table>
 

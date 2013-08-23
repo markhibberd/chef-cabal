@@ -13,11 +13,29 @@ class FlagStore
   end
 
   def flag(trigger, f)
-    @flags << f if trigger
+    if trigger
+      if !!trigger == trigger
+        @flags << f
+      else
+        @flags << "#{f}=#{trigger}"
+      end
+    end
   end
 
   def to_args
     @flags.join(" ")
+  end
+end
+
+def set_environment
+  if new_resource.environment
+    environment = []
+    new_resource.environment.each do |key, value|
+      environment << "#{key}=#{value}"
+    end
+    return environment.join(" ")
+  else
+    return ""
   end
 end
 
@@ -62,13 +80,13 @@ end
 
 def install_by_name
   run_cabal_update if new_resource.cabal_update
-  execute "su - #{new_resource.user} -c '#{cabal_command} #{new_resource.package_name}'"
+  execute "su - #{new_resource.user} -c '#{set_environment} #{cabal_command} #{new_resource.package_name}'"
 end
 
 
 def install_by_path(path)
   run_cabal_update if new_resource.cabal_update
-  execute "su - #{new_resource.user} -c 'cd #{path} && #{cabal_command(new_resource.cabal_dev)}'"
+  execute "su - #{new_resource.user} -c 'cd #{path} && #{set_environment} #{cabal_command(new_resource.cabal_dev)}'"
   install_binary(path) if new_resource.install_binary
 end
 
