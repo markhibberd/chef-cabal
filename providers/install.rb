@@ -62,6 +62,7 @@ def cabal_command(use_cabal_dev = false)
   store.flag(new_resource.user_install, '--user')
   store.flag(new_resource.global_install, '--global')
   store.flag(new_resource.solver, '--solver')
+  store.flag(new_resource.builddir, '--builddir')
 
   if new_resource.with_flags
     new_resource.with_flags.each do |flag, value|

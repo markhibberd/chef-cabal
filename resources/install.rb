@@ -30,3 +30,4 @@ attribute :cabal_update, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :cache_for, :kind_of => Integer, :default => 60 * 24
 attribute :install_binary, :kind_of => Hash
 attribute :with_flags, :kind_of => Hash
+attribute :builddir, :kind_of => String, :default => nil
