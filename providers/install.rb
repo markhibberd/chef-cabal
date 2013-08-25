@@ -13,7 +13,13 @@ class FlagStore
   end
 
   def flag(trigger, f)
-    @flags << f if trigger
+    if trigger
+      if !!trigger == trigger
+        @flags << f
+      else
+        @flags << "#{f}=#{trigger}"
+      end
+    end
   end
 
   def to_args
@@ -56,6 +62,12 @@ def cabal_command(use_cabal_dev = false)
   store.flag(new_resource.user_install, '--user')
   store.flag(new_resource.global_install, '--global')
   store.flag(new_resource.solver, '--solver')
+
+  if new_resource.with_flags
+    new_resource.with_flags.each do |flag, value|
+      store.flag(value, "--with-#{flag}")
+    end
+  end
 
   "#{cmd} install #{store.to_args}"
 end
