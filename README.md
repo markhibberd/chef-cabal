@@ -84,8 +84,7 @@ Install a package from hackage, a path, a git repo or a github repo.
  * `cache_for` - See cabal_update resource. This is minutes to cache current cabal index for.
  * `with_flags` - Pass `-with-#{flag}=#{value}` to cabal. Each key in the hash should be the name of a program for which cabal-install supports setting a path.
  * `builddir` - Pass `--buildir #{builddir}` flag to cabal. Off by default.
-
-</table>
+ * `environment` - A hash of environmental variables to set when running the `cabal install` command.  Empty by default.
 
 #### Examples
 
