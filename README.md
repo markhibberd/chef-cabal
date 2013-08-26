@@ -85,6 +85,7 @@ Install a package from hackage, a path, a git repo or a github repo.
  * `with_flags` - Pass `-with-#{flag}=#{value}` to cabal. Each key in the hash should be the name of a program for which cabal-install supports setting a path.
  * `builddir` - Pass `--buildir #{builddir}` flag to cabal. Off by default.
  * `environment` - A hash of environmental variables to set when running the `cabal install` command.  Empty by default.
+ * `return_codes` - An array of accepted return codes for cabal install.  0 by default.
 
 #### Examples
 

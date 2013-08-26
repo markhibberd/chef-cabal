@@ -87,13 +87,17 @@ end
 
 def install_by_name
   run_cabal_update if new_resource.cabal_update
-  execute "su - #{new_resource.user} -c '#{set_environment} #{cabal_command} #{new_resource.package_name}'"
+  execute "su - #{new_resource.user} -c '#{set_environment} #{cabal_command} #{new_resource.package_name}'" do
+    returns new_resource.return_codes
+  end
 end
 
 
 def install_by_path(path)
   run_cabal_update if new_resource.cabal_update
-  execute "su - #{new_resource.user} -c 'cd #{path} && #{set_environment} #{cabal_command(new_resource.cabal_dev)}'"
+  execute "su - #{new_resource.user} -c 'cd #{path} && #{set_environment} #{cabal_command(new_resource.cabal_dev)}'" do
+    returns new_resource.return_codes
+  end
   install_binary(path) if new_resource.install_binary
 end
 
