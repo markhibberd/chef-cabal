@@ -32,3 +32,4 @@ attribute :install_binary, :kind_of => Hash
 attribute :with_flags, :kind_of => Hash
 attribute :builddir, :kind_of => String, :default => nil
 attribute :environment, :kind_of => Hash
+attribute :return_codes, :kind_of => Array, :default => [0]
